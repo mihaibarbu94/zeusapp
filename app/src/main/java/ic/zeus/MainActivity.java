@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+//                    mTextMessage.setText(R.string.title_home);
                     replaceFragment(0);
                     return true;
                 case R.id.navigation_dashboard:
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        replaceFragment(0);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Create method replace fragment
     private void replaceFragment(int pos) {
-        Fragment fragment = null;
+        Fragment fragment;
         switch (pos) {
             case 0:
                 fragment = new HomeFragment();
@@ -73,6 +74,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
 }

@@ -12,7 +12,7 @@ public class BatteryReader {
     public ArrayList<Long> getReading(){
         ArrayList<Long> result = new ArrayList<>();
         BatteryManager mBatteryManager;
-        mBatteryManager = (BatteryManager) MyApplication.getAppContext().getSystemService(Context.BATTERY_SERVICE);
+        mBatteryManager = (BatteryManager) Zeus.getAppContext().getSystemService(Context.BATTERY_SERVICE);
         Long energy = mBatteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_ENERGY_COUNTER);
         Long current = mBatteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
         Long current_now = mBatteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE);
@@ -21,7 +21,7 @@ public class BatteryReader {
 
 
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        Intent batteryStatus = MyApplication.getAppContext().registerReceiver(null, ifilter);
+        Intent batteryStatus = Zeus.getAppContext().registerReceiver(null, ifilter);
         int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
         int voltage = batteryStatus.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1);
@@ -32,11 +32,10 @@ public class BatteryReader {
         //result.add(energy);
         result.add(current);
         //result.add(current_now);
-        result.add(capacity);
+        //result.add(capacity);
         //result.add(charge_counter);
         result.add((long) batteryPct);
         result.add((long) voltage);
-
         return result;
     }
 }

@@ -36,6 +36,7 @@
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="foregroundImage" value="C:\Users\Barbu\Desktop\Diz\zeus\startbootstrap\img\zeus.svg" />
                                       <entry key="legacyIconShape" value="CIRCLE" />
+                                      <entry key="outputName" value="logo_zeus" />
                                       <entry key="webIconShape" value="CIRCLE" />
                                     </map>
                                   </option>

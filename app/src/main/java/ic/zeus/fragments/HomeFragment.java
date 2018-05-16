@@ -8,10 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import ic.zeus.BatteryReader;
+import ic.zeus.DeviceNameReader;
 import ic.zeus.MainActivity;
 import ic.zeus.R;
-import ic.zeus.mail_manager.MailSender;
 import ic.zeus.sockets.ServerCommunicator;
 
 public class HomeFragment extends Fragment {
@@ -49,13 +55,53 @@ public class HomeFragment extends Fragment {
 
     private void sendData() {
         BatteryReader batteryReader = new BatteryReader();
-        String reading = "" + batteryReader.getReading();
-        new MailSender().execute(reading);
-        Log.d(DEBUG, "MAIL SENT!!!!!!!!!!!!!!!!!!!!!!!");
+        String deviceName = DeviceNameReader.getDeviceName();
+        String dataToSend = "";
+//        try {
+//             dataToSend= prepareDataToSend1(deviceName, batteryReader.getReading()).toString();
+//        } catch (JSONException e) {
+//            Log.e("Home Fragment", "ERROR", e);
+//        }
+        dataToSend= prepareDataToSend2(deviceName, batteryReader.getReading()).toString();
+//        new MailSender().execute(dataToSend);
+//        Log.d(DEBUG, "MAIL SENT!!!!!!!!!!!!!!!!!!!!!!!");
 
-        String[] payload = new String[]{"192.168.1.137", "8084", reading};
+        String[] payload = new String[]{"192.168.1.137", "8084", dataToSend};
         new ServerCommunicator().execute(payload);
         Log.d(DEBUG, "Payload sent to server!!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
+    private String prepareDataToSend(String deviceName, ArrayList<Long> data){
+        String output = "[";
+        output += "\"" + deviceName + "\",";
+        for(int i = 0; i < data.size(); i++){
+            output += "\"" + data.get(i);
+            if (i != data.size() - 1){
+                output += "\",";
+            } else {
+                output += "\"";
+            }
+        }
+
+        output += "]";
+
+        return output;
+    }
+
+    private JSONObject prepareDataToSend1(String deviceName, ArrayList<Long> data) throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put(deviceName, new JSONArray(data));
+
+        return object;
+    }
+
+    private JSONArray prepareDataToSend2(String deviceName, ArrayList<Long> data){
+        ArrayList<String> dataToString = new ArrayList<>();
+        dataToString.add(deviceName);
+        for(Long l: data){
+            dataToString.add(String.valueOf(l));
+        }
+        return new JSONArray(dataToString);
     }
 }
 
