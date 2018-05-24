@@ -8,6 +8,7 @@ import android.os.BatteryManager;
 import java.util.ArrayList;
 
 public class BatteryReader {
+    private final String ONE_PLUS = "OnePlus ONEPLUS A5000";
 
     public ArrayList<Long> getReading(){
         ArrayList<Long> result = new ArrayList<>();
@@ -30,12 +31,21 @@ public class BatteryReader {
         float batteryPct = (level / (float)scale) * 100;
 
         //result.add(energy);
-        result.add(current);
+        result.add(amendCurrentValue(current));
         //result.add(current_now);
         //result.add(capacity);
         //result.add(charge_counter);
         result.add((long) batteryPct);
         result.add((long) voltage);
         return result;
+    }
+
+    private long amendCurrentValue(long value){
+        String name = DeviceNameReader.getDeviceName();
+
+        if(name.equals(ONE_PLUS)) {
+            return -value/1000;
+        }
+        return value;
     }
 }

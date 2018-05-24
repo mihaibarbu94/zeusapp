@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="ip_address_of_server">IP address of server</string>
+    <string name="send_data">Send Data</string>
+    <string name="update_ip">Update IP</string>
+    <string name="server_ip">192.168.1.137</string>
 </resources>

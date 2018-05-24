@@ -8,6 +8,26 @@
         android:layout_marginStart="100dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Data" />
+        android:text="@string/send_data" />
+
+    <EditText
+        android:id="@+id/edit_ip"
+        android:hint="@string/ip_address_of_server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="122dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/update_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/edit_ip"
+        android:layout_marginEnd="67dp"
+        android:text="@string/update_ip" />
 
 </RelativeLayout>
