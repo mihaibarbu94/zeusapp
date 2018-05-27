@@ -11,8 +11,6 @@ import android.support.test.filters.SdkSuppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.UiDevice;
-import android.support.test.uiautomator.UiObject;
-import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
@@ -37,7 +35,7 @@ public class AsusNexus7Test {
     private static final long DEFAULT_TIMEOUT = 1000;
     private UiDevice mDevice;
     private UiScrollable uiScrollable;
-    private long currentTime;
+    private long testStartTime;
     private final Pair<Integer, Integer> chromeRefreshCoordinates = new Pair<>(250,200);
     private final Pair<Integer, Integer> firefoxRefreshCoordinates = new Pair<>(910,200);
     private final Pair<Integer, Integer> operaRefreshCoordinates = new Pair<>(980,190);
@@ -69,9 +67,13 @@ public class AsusNexus7Test {
 
 
     private boolean timeIsOut(int minutesUntilTestIsFinished) {
-        long remainingTime = minutesUntilTestIsFinished * 60 - (System.currentTimeMillis() - currentTime) / 1000;
-        Log.e("TIME", "Remaining time:" + remainingTime);
-        return remainingTime <= 0;
+        long remainingTimeInSeconds = minutesUntilTestIsFinished * 60 - calculateTimePassedSinceStart();
+        Log.e("TIME", "Remaining time:" + remainingTimeInSeconds + " seconds.");
+        return remainingTimeInSeconds <= 0;
+    }
+
+    private long calculateTimePassedSinceStart(){
+        return (System.currentTimeMillis() - testStartTime) / 1000;
     }
 
     private void swipeAndWait(int times) {
@@ -87,63 +89,18 @@ public class AsusNexus7Test {
 
     }
 
-    private void testBrowserX(List<Pair> coordinates, String browserName, boolean swipeBefore) throws UiObjectNotFoundException {
-        currentTime = System.currentTimeMillis();
-        culebraGeneratedTest(browserName);
-
-
-        int times = 70;
-        while(times != 0 && !timeIsOut(30)) {
-            uiScrollable.scrollToEnd(300, 60);
-            clickOnCoordinates(coordinates, swipeBefore);
-            mDevice.waitForIdle(5000);
-            times--;
-        }
-
-        Sender sender = new Sender();
-        sender.sendData();
-    }
-
-    private void testBrowser1(Pair coordinates, String browserName, boolean swipeBefore) throws UiObjectNotFoundException {
-        currentTime = System.currentTimeMillis();
-        culebraGeneratedTest(browserName);
-
-
-        int times = 70;
-        while(times != 0 && !timeIsOut(30)) {
-            searchForText("NEXT");
-            mDevice.waitForIdle(5000);
-            times--;
-        }
-
-        Sender sender = new Sender();
-        sender.sendData();
-    }
-
     private void testBrowser(List<Pair> coordinates, String browserName, boolean swipeBefore) {
-        currentTime = System.currentTimeMillis();
+        testStartTime = System.currentTimeMillis();
         culebraGeneratedTest(browserName);
+        Sender sender = new Sender();
 
         int times = 70;
         while(times != 0 && !timeIsOut(30)) {
-            swipeAndWait(60);//should be 60 aprox 1 min
+            swipeAndWait(20);//should be 60 aprox 5 min
             clickOnCoordinates(coordinates, swipeBefore);
+            sender.sendTestInfo(browserName, String.valueOf(calculateTimePassedSinceStart()));
             times--;
-        }
 
-        Sender sender = new Sender();
-        sender.sendData();
-    }
-
-    private void searchForText(String searchText)
-            throws UiObjectNotFoundException {
-        UiScrollable textScroll;
-        UiObject text;
-        if (searchText != null) {
-            textScroll = new UiScrollable(new UiSelector().scrollable(true));
-            textScroll.scrollIntoView(new UiSelector().text(searchText));
-            text = new UiObject(new UiSelector().text(searchText));
-            text.click();
         }
     }
 
@@ -162,18 +119,6 @@ public class AsusNexus7Test {
 
         mDevice.waitForIdle();
     }
-
-//    @Test
-//    public void testChromeReddit() throws UiObjectNotFoundException {
-//        testBrowser(redditNextCoordinates, "Chrome", false);
-//    }
-//
-//    @Test
-//    public void testFirefoxReddit() throws UiObjectNotFoundException {
-//        testBrowser(firefoxRefreshCoordinates, "Firefox", true);
-//    }
-
-
 
     @Test
     public void testChromeWithRefreshPage() {

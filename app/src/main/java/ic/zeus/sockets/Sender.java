@@ -36,6 +36,26 @@ public class Sender {
         Log.d(DEBUG, "Payload sent to server!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
+    public void sendTestInfo(String browser, String time) {
+        BatteryReader batteryReader = new BatteryReader();
+        String deviceName = DeviceNameReader.getDeviceName();
+        String dataToSend = "";
+//        try {
+//             dataToSend= prepareDataToSend1(deviceName, batteryReader.getReading()).toString();
+//        } catch (JSONException e) {
+//            Log.e("Home Fragment", "ERROR", e);
+//        }
+        dataToSend= prepareDataToSend3(deviceName, browser, time, batteryReader.getReading()).toString();
+//        new MailSender().execute(dataToSend);
+//        Log.d(DEBUG, "MAIL SENT!!!!!!!!!!!!!!!!!!!!!!!");
+
+        // imperial 146.169.183.138
+        Log.d(DEBUG, dataToSend);
+        String[] payload = new String[]{IP_ADRESS, "8084", dataToSend};
+        new ServerCommunicator().execute(payload);
+        Log.d(DEBUG, "Payload sent to server!!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
     private String prepareDataToSend(String deviceName, ArrayList<Long> data){
         String output = "[";
         output += "\"" + deviceName + "\",";
@@ -63,6 +83,17 @@ public class Sender {
     private JSONArray prepareDataToSend2(String deviceName, ArrayList<Long> data){
         ArrayList<String> dataToString = new ArrayList<>();
         dataToString.add(deviceName);
+        for(Long l: data){
+            dataToString.add(String.valueOf(l));
+        }
+        return new JSONArray(dataToString);
+    }
+
+    private JSONArray prepareDataToSend3(String deviceName, String browser, String time,  ArrayList<Long> data){
+        ArrayList<String> dataToString = new ArrayList<>();
+        dataToString.add(deviceName);
+        dataToString.add(browser);
+        dataToString.add(time);
         for(Long l: data){
             dataToString.add(String.valueOf(l));
         }

@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
         sendData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sender.sendData();
+                sender.sendTestInfo("Test browser", "10");
             }
         });
 
