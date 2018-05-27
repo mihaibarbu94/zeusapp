@@ -14,6 +14,7 @@ import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.util.Log;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,10 +29,11 @@ import ic.zeus.sockets.Sender;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
-public class ExampleInstrumentedTest {
+public class OnePlus5Test {
     private static final String TAG = "@@MyClassNameHere@@";
     private static final long DEFAULT_TIMEOUT = 1000;
     private UiDevice mDevice;
+    private long currentTime;
 
     @Before
     public void setUp() {
@@ -45,7 +47,7 @@ public class ExampleInstrumentedTest {
      *
      * @throws Exception
      */
-    private void culebraGeneratedTest(int times) throws Exception {
+    private void culebraGeneratedTest() throws Exception {
         mDevice.pressHome();
         mDevice.click(559, 1708);
         mDevice.findObject(By.res("net.oneplus.launcher:id/all_apps_handle")
@@ -60,11 +62,30 @@ public class ExampleInstrumentedTest {
                 .packageName("net.oneplus.launcher")))
                 .getChildByDescription(new UiSelector().description(
                         "Chrome"), "Chrome", true).click();
+    }
 
-        assert(times > 5);
+    private boolean timeIsOut(int minutesUntilTestIsFinished) {
+        long remainingTime = minutesUntilTestIsFinished * 60 - (System.currentTimeMillis() - currentTime) / 1000;
+        Log.e("TIME", "Remaining time:" + remainingTime);
+        return remainingTime <= 0;
+    }
+
+    private void swipeAndWait(int times){
         while(times != 0) {
-            mDevice.swipe(500,1300,500,400,50);
+            mDevice.swipe(500,1500,500,300,50);
             mDevice.waitForIdle(1000);
+            times--;
+        }
+    }
+
+    @Test
+    public void test() throws Exception {
+        currentTime = System.currentTimeMillis();
+        culebraGeneratedTest();
+
+        int times = 70;
+        while(times != 0 && !timeIsOut(30)) {
+            swipeAndWait(60);
             times--;
         }
 
@@ -72,11 +93,6 @@ public class ExampleInstrumentedTest {
 
         Sender sender = new Sender();
         sender.sendData();
-    }
-
-    @Test
-    public void test() throws Exception {
-        culebraGeneratedTest(5);
     }
 
 }
