@@ -14,7 +14,7 @@ import ic.zeus.DeviceNameReader;
 public class Sender {
 
     private static final String DEBUG = "Sender";
-    public static String IP_ADRESS = "192.168.1.137";
+    public static String IP_ADDRESS = "192.168.1.20";
 
     public void sendData() {
         BatteryReader batteryReader = new BatteryReader();
@@ -31,7 +31,7 @@ public class Sender {
 
         // imperial 146.169.183.138
         Log.d(DEBUG, dataToSend);
-        String[] payload = new String[]{IP_ADRESS, "8084", dataToSend};
+        String[] payload = new String[]{IP_ADDRESS, "8084", dataToSend};
         new ServerCommunicator().execute(payload);
         Log.d(DEBUG, "Payload sent to server!!!!!!!!!!!!!!!!!!!!!!!");
     }
@@ -51,7 +51,7 @@ public class Sender {
 
         // imperial 146.169.183.138
         Log.d(DEBUG, dataToSend);
-        String[] payload = new String[]{IP_ADRESS, "8084", dataToSend};
+        String[] payload = new String[]{IP_ADDRESS, "8084", dataToSend};
         new ServerCommunicator().execute(payload);
         Log.d(DEBUG, "Payload sent to server!!!!!!!!!!!!!!!!!!!!!!!");
     }

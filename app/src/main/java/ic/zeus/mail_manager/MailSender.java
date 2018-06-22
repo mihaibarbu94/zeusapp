@@ -25,9 +25,4 @@ public class MailSender extends AsyncTask<String, Void, Void> {
 
         return null;
     }
-
-//    protected void onPostExecute(RSSFeed feed) {
-//        // TODO: check this.exception
-//        // TODO: do something with the feed
-//    }
 }

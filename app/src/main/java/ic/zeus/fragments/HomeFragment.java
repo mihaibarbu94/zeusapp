@@ -49,14 +49,14 @@ public class HomeFragment extends Fragment {
 
         updateIp = view.findViewById(R.id.update_ip);
         ip_editor = view.findViewById(R.id.edit_ip);
-        ip_editor.setText(Sender.IP_ADRESS);
+        ip_editor.setText(Sender.IP_ADDRESS);
         updateIp.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
                     {
                         ip_editor.setText(ip_editor.getText().toString());
-                        Sender.IP_ADRESS = ip_editor.getText().toString();
+                        Sender.IP_ADDRESS = ip_editor.getText().toString();
                         Log.v("EditText", ip_editor.getText().toString());
                     }
                 });
