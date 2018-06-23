@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -55,6 +56,9 @@ public class SettingsFragment extends Fragment {
         }
 
         view = getView();
+
+        TextView t = (TextView)view.findViewById(R.id.textView);
+        t.setText("Test server connection by sending battery info data.");
 
         sendData = view.findViewById(R.id.send_data);
         final Sender sender = new Sender();
