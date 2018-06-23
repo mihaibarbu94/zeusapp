@@ -5,29 +5,68 @@
 
     <Button
         android:id="@+id/send_data"
-        android:layout_marginStart="100dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/update_ip"
+        android:layout_marginTop="16dp"
         android:text="@string/send_data" />
 
     <EditText
         android:id="@+id/edit_ip"
-        android:hint="@string/ip_address_of_server"
-        android:layout_width="wrap_content"
+        android:layout_width="282dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="122dp"
+        android:layout_marginTop="126dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:hint="@string/ip_address_of_server"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true" />
+
+    <EditText
+        android:id="@+id/edit_port"
+        android:layout_width="284dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/update_port"
+        android:ems="10"
+        android:hint="@string/port_of_server"
+        android:inputType="text|textPersonName"
+        android:selectAllOnFocus="true" />
 
     <Button
         android:id="@+id/update_ip"
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/edit_ip"
-        android:layout_marginEnd="67dp"
+        android:layout_marginEnd="12dp"
         android:text="@string/update_ip" />
+
+    <Button
+        android:id="@+id/update_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/update_ip"
+        android:layout_marginTop="193dp"
+        android:text="@string/update_port" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/send_data"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:lineSpacingExtra="8sp"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:text="@string/here_you_can_test_the_connection_with_the_server"
+        android:textAlignment="center"
+        android:typeface="normal"
+        android:visibility="visible" />
 
 </RelativeLayout>

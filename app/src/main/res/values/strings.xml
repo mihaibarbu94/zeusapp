@@ -3,8 +3,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="ip_address_of_server">IP address of server</string>
-    <string name="send_data">Send Data</string>
+    <string name="ip_address_of_server">Server IP address</string>
+    <string name="port_of_server">Server port number</string>
     <string name="update_ip">Update IP</string>
-    <string name="server_ip">192.168.1.137</string>
+    <string name="send_data">Send Data</string>
+    <string name="here_you_can_test_the_connection_with_the_server">Here you can test the connection with the server</string>
+    <string name="update_port">Update Port</string>
+    <string name="title_info">Info</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_contact">Contact</string>
 </resources>
