@@ -132,4 +132,9 @@ public class Sender {
         }
         return new JSONArray(dataToString);
     }
+
+    public String getIP(){
+        serverIp = readFromFile(Zeus.getAppContext());
+        return serverIp;
+    }
 }

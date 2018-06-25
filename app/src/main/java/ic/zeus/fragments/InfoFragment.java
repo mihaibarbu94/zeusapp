@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import ic.zeus.R;
+import ic.zeus.sockets.Sender;
 
 public class InfoFragment extends Fragment {
 
@@ -33,7 +34,7 @@ public class InfoFragment extends Fragment {
         webview.getSettings().setDomStorageEnabled(true);
         webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
         //webview.loadUrl("http://146.169.176.119:3000/");
-        webview.loadUrl("http://192.168.0.30:3000/");
+        webview.loadUrl("http://" + new Sender().getIP() + ":3000/");
     }
 
 

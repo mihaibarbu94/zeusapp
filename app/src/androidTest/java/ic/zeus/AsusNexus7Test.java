@@ -1,9 +1,4 @@
 package ic.zeus;
-/*************************************************************************
- * CulebraTester (C) 2015-2016 Diego Torres Milano
- *
- * <p/>
- ************************************************************************/
 
 import android.app.Instrumentation;
 import android.os.RemoteException;
@@ -51,6 +46,8 @@ public class AsusNexus7Test {
     private static final int TIME_TO_REFRESH_PAGE = 6000;
     private static final int TIME_TO_SCROLL_PAGE = 120; //120 seconds
     private final int TEST_TIME_IN_MINUTES = 30; // 30 minutes
+
+    private final String CHROME_BROWSER = "Chrome";
 
 
     @Before
